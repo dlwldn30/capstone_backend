@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+</head>
+<body>
+
+<h1>회원가입 폼</h1>
+
+<form method="post" action="/users">
+    <label>Username:</label><br>
+    <input type="text" name="username" required><br><br>
+
+    <label>Password:</label><br>
+    <input type="password" name="password" required><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <label>Preferred Time:</label><br>
+    <select name="preferredTime" required>
+        <option value="MORNING">Morning</option>
+        <option value="AFTERNOON">Afternoon</option>
+        <option value="EVENING">Evening</option>
+    </select><br><br>
+
+    <button type="submit">가입하기</button>
+</form>
+
+</body>
+</html>
