@@ -5,7 +5,8 @@ import capstone.backend.time.domain.PreferredTime;
 import capstone.backend.time.domain.TimePurpose;
 import capstone.backend.time.domain.TimeSlot;
 import capstone.backend.time.service.PreferredTimeService;
-import capstone.backend.user.User;
+import capstone.backend.user.domain.User;
+import capstone.backend.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class PreferredTimeController {
 
     private final PreferredTimeService preferredTimeService;
+    private final UserService userService;
 
     @PostMapping
     public PreferredTime createPreferredTime(@RequestParam Long userId, @RequestParam TimeSlot timeSlot, @RequestParam TimePurpose purpose) {
