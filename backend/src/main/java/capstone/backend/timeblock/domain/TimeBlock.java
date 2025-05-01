@@ -19,6 +19,8 @@ public class TimeBlock {
     @Column(nullable = false)
     private Long userId;
 
+
+    //그냥 달아봄
     @Column(nullable = false)
     private String dayOfWeek;
 
