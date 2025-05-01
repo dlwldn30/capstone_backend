@@ -22,9 +22,10 @@ public class UserController {
     }
 
     @PostMapping
-    public String createUser(@ModelAttribute User user, @RequestParam("preferredTime")TimeSlot timeSlot) {
+    public String createUser(@ModelAttribute User user, @RequestParam("timeSlot")TimeSlot timeSlot) {
 
         PreferredTime preferredTime = new PreferredTime(user, timeSlot, TimePurpose.FREE);
+        user.getPreferredTimes().add(preferredTime);
         userService.save(user);
         return "redirect:/tasks/new";
     }
