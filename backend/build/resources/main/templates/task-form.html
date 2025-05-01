@@ -1,52 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>Task 등록</title>
 </head>
 <body>
-
 <h1>Task 등록하기</h1>
 
-<form method="post" action="/tasks">
-    <label>제목:</label><br>
-    <input type="text" name="title" required><br><br>
-
-    <label>설명:</label><br>
-    <input type="text" name="description"><br><br>
+<form method="post" th:action="@{/tasks}" th:object="${task}">
+    <input type="text" th:field="*{title}" placeholder="제목" required><br>
+    <input type="text" th:field="*{description}" placeholder="설명"><br>
 
     <label>시작 시간:</label><br>
-    <input type="datetime-local" name="startTime" required><br><br>
+    <input type="datetime-local" th:field="*{startTime}"><br>
 
     <label>종료 시간:</label><br>
-    <input type="datetime-local" name="endTime" required><br><br>
+    <input type="datetime-local" th:field="*{endTime}"><br>
 
     <label>카테고리:</label><br>
-    <select name="category" required>
-        <option value="STUDY">Study</option>
-        <option value="EXERCISE">Exercise</option>
-        <option value="TEST">Test</option>
-        <option value="TASK">Task</option>
-        <option value="MEETING">Meeting</option>
-        <option value="TRAVEL">Travel</option>
-        <option value="ETC">Etc</option>
-    </select><br><br>
+    <select th:field="*{category}">
+        <option value="STUDY">STUDY</option>
+        <option value="EXERCISE">EXERCISE</option>
+        <option value="TEST">TEST</option>
+        <option value="TASK">TASK</option>
+        <option value="MEETING">MEETING</option>
+        <option value="TRAVEL">TRAVEL</option>
+        <option value="ETC">ETC</option>
+    </select><br>
 
-    <label>우선순위 (1~5):</label><br>
-    <input type="number" name="priority" min="1" max="5" required><br><br>
+    <label>우선순위 (1~5):</label>
+    <input type="number" th:field="*{priority}" min="1" max="5"><br>
 
-    <label>선호도 (1~5):</label><br>
-    <input type="number" name="preference" min="1" max="5" required><br><br>
+    <label>선호도 (1~5):</label>
+    <input type="number" name="preference" min="1" max="5"><br> <!-- preference 필드는 Task에 없다면 제거 -->
 
-    <input type="hidden" name="completed" value="false">
-    <label>완료 여부:</label>
-    <input type="checkbox" name="completed" value="true"><br><br>
+    <label>반복:</label>
+    <input type="checkbox" th:field="*{repeated}"><br>
 
-    <input type="hidden" name="isRepeated" value="false">
-    <label>반복 여부:</label>
-    <input type="checkbox" name="isRepeated" value="true"><br><br>
+    <label>완료:</label>
+    <input type="checkbox" th:field="*{completed}"><br>
 
-    <button type="submit">Task 등록하기</button>
+    <button type="submit">등록</button>
 </form>
 
 </body>

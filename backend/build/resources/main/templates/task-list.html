@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>나의 작업 목록</title>
+</head>
+<body>
+<h1>나의 작업 목록</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>제목</th>
+        <th>설명</th>
+        <th>카테고리</th>
+        <th>시작 시간</th>
+        <th>종료 시간</th>
+        <th>우선순위</th>
+        <th>반복</th>
+        <th>완료</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.title}">제목</td>
+        <td th:text="${task.description}">설명</td>
+        <td th:text="${task.category}">카테고리</td>
+        <td th:text="${#temporals.format(task.startTime, 'yyyy-MM-dd HH:mm')}">시작</td>
+        <td th:text="${#temporals.format(task.endTime, 'yyyy-MM-dd HH:mm')}">종료</td>
+        <td th:text="${task.priority}">우선</td>
+        <td th:text="${task.repeated} ? 'O' : 'X'">반복</td>
+        <td th:text="${task.completed} ? '✔' : ''">완료</td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a th:href="@{/tasks/new}">+ 새 작업 추가하기</a>
+
+</body>
+</html>

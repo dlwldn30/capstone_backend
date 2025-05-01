@@ -1,6 +1,6 @@
 package capstone.backend.time.domain;
 
-import capstone.backend.user.User;
+import capstone.backend.user.domain.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
