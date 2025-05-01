@@ -16,6 +16,7 @@
         <th>시작 시간</th>
         <th>종료 시간</th>
         <th>우선순위</th>
+        <th>선호도</th> <!-- ✅ 추가 -->
         <th>반복</th>
         <th>완료</th>
     </tr>
@@ -28,6 +29,7 @@
         <td th:text="${#temporals.format(task.startTime, 'yyyy-MM-dd HH:mm')}">시작</td>
         <td th:text="${#temporals.format(task.endTime, 'yyyy-MM-dd HH:mm')}">종료</td>
         <td th:text="${task.priority}">우선</td>
+        <td th:text="${task.preference}">선호도</td> <!-- ✅ 추가 -->
         <td th:text="${task.repeated} ? 'O' : 'X'">반복</td>
         <td th:text="${task.completed} ? '✔' : ''">완료</td>
     </tr>

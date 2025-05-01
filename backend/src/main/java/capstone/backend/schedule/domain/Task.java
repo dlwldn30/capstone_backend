@@ -22,6 +22,7 @@ public class Task {
     private boolean isRepeated;
     private boolean completed;
     private int priority;
+    private int preference; // ✅ 선호도 추가
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -30,6 +31,7 @@ public class Task {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }
+
 
 
 
