@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/tasks")
 @RequiredArgsConstructor
 public class TaskController {
@@ -26,7 +26,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public String createTask(@ModelAttribute Task task,
+    public Task createTask(@ModelAttribute Task task,
                              @AuthenticationPrincipal UserDetails userDetails) {
 
         // Spring Security 세션에 저장된 email 기반으로 실제 User 엔티티 조회
@@ -35,7 +35,7 @@ public class TaskController {
 
         task.setUser(user); // 🔥 연관관계 설정
         taskService.save(task);
-        return "redirect:/tasks";
+        return taskService.save(task);
     }
 
     @GetMapping
