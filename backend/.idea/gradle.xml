@@ -8,7 +8,7 @@
         <option name="gradleJvm" value="openjdk-21" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/../../capstone_backend_task_연동/backend" />
           </set>
         </option>
       </GradleProjectSettings>

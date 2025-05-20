@@ -11,6 +11,8 @@ import java.time.OffsetDateTime;
 @Setter
 public class TaskRequestDTO {
 
+    private Long userId;
+
     private String title;
     private String description;
     private String category;

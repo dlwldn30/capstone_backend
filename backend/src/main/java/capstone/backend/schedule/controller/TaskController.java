@@ -1,6 +1,7 @@
 package capstone.backend.schedule.controller;
 
 import capstone.backend.schedule.dto.TaskRequestDTO;
+import capstone.backend.schedule.repository.TaskRepository;
 import capstone.backend.schedule.service.TaskService;
 import capstone.backend.schedule.domain.Task;
 import capstone.backend.user.CustomUserDetails;
@@ -13,10 +14,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/tasks")
 @RequiredArgsConstructor
 public class TaskController {
+
+    private final TaskRepository taskRepository;
 
     private final TaskService taskService;
     private final UserRepository userRepository;
@@ -62,6 +68,34 @@ public class TaskController {
         System.out.println("✅ TaskController: POST 요청 들어옴");
         taskService.createTask(requestDto, userDetails.getUser());
         return ResponseEntity.ok("Task 저장 완료");
+    }
+
+    @PostMapping("/batch")
+    public ResponseEntity<?> createBatchTasksWithoutAuth(@RequestBody List<TaskRequestDTO> taskDtos) {
+
+        for (TaskRequestDTO dto : taskDtos) {
+            System.out.println("📨 요청 Task: " + dto.getTitle() + " / userId: " + dto.getUserId());
+            User user = userRepository.findById(dto.getUserId())
+                    .orElseThrow(() -> new RuntimeException("유저 정보를 찾을 수 없습니다."));
+
+
+            Task task = Task.builder()
+                    .title(dto.getTitle())
+                    .description(dto.getDescription())
+                    .category(dto.getCategory())
+                    .isRepeated(dto.isRepeatEvent())
+                    .completed(dto.isCompleted())
+                    .priority(dto.getPriority())
+                    .preference(dto.getPreference())
+                    .startTime(dto.getStartTime())
+                    .endTime(dto.getEndTime())
+                    .user(user)
+                    .build();
+            System.out.println("✅ 저장 Task: " + task.getTitle());
+            taskRepository.save(task);
+        }
+
+        return ResponseEntity.ok(Map.of("message", "일정 저장 완료", "count", taskDtos.size()));
     }
 }
 

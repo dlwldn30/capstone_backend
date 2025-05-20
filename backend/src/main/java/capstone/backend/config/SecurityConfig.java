@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .exceptionHandling(e -> e.authenticationEntryPoint(jwtEntryPoint))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/login", "/api/users", "api/auth/**", "/api/events", "/signup", "/login", "/users/new", "/users", "api/tasks").permitAll()
+                        .requestMatchers("/api/login", "/api/users", "/api/auth/**", "/api/events", "/signup", "/login", "/users/new", "/users", "/api/tasks", "/api/tasks/batch").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
