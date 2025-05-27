@@ -30,4 +30,28 @@ public class User implements UserDetails {
     @Override public boolean isAccountNonLocked() { return true; }
     @Override public boolean isCredentialsNonExpired() { return true; }
     @Override public boolean isEnabled() { return true; }
+
+
+    //랭크
+    private int experience = 0;
+
+    @Enumerated(EnumType.STRING)
+    private Rank rank = Rank.BRONZE;
+
+
+    public enum Rank {
+        BRONZE, SILVER, GOLD, DIAMOND
+    }
+    // ✅ 경험치 추가 및 랭크 갱신 메서드
+    public void addExperience(int amount) {
+        this.experience += amount;
+        updateRank();
+    }
+
+    public void updateRank() {
+        if (experience >= 500) rank = Rank.DIAMOND;
+        else if (experience >= 300) rank = Rank.GOLD;
+        else if (experience >= 150) rank = Rank.SILVER;
+        else rank = Rank.BRONZE;
+    }
 }
