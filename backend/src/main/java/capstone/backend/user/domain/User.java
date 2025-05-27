@@ -36,7 +36,8 @@ public class User implements UserDetails {
     private int experience = 0;
 
     @Enumerated(EnumType.STRING)
-    private Rank rank = Rank.BRONZE;
+    @Column(name = "user_rank") // 또는 원하는 이름
+    private Rank userRank= Rank.BRONZE;
 
 
     public enum Rank {
@@ -49,9 +50,10 @@ public class User implements UserDetails {
     }
 
     public void updateRank() {
-        if (experience >= 500) rank = Rank.DIAMOND;
-        else if (experience >= 300) rank = Rank.GOLD;
-        else if (experience >= 150) rank = Rank.SILVER;
-        else rank = Rank.BRONZE;
+        if (experience >= 500) userRank = Rank.DIAMOND;
+        else if (experience >= 300) userRank = Rank.GOLD;
+        else if (experience >= 150) userRank = Rank.SILVER;
+        else userRank = Rank.BRONZE;
     }
+
 }
