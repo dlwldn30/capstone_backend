@@ -18,8 +18,8 @@ public class ExperienceController {
     @PostMapping("/reward")
     public ResponseEntity<String> reward(
             @RequestParam Long userId,
-            @RequestParam int amount) {
-        experienceService.rewardExperience(userId, amount);
+            @RequestParam int successCount) {
+        experienceService.rewardExperience(userId, successCount);
         return ResponseEntity.ok("경험치 추가 완료");
     }
 }
