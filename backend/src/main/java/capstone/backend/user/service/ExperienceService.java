@@ -11,11 +11,11 @@ public class ExperienceService {
 
     private final UserRepository userRepository;
 
-    public void rewardExperience(Long userId, int amount) {
+    public void rewardExperience(Long userId, int successCount) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("사용자 없음"));
 
-        user.addExperience(amount); // 경험치 추가 + 랭크 갱신
+        user.addExperience(successCount); // 경험치 추가 + 랭크 갱신
         userRepository.save(user);
     }
 }
